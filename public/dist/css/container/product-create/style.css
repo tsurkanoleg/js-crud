@@ -1,0 +1,78 @@
+body {
+  font-family: "Roboto", sans-serif;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  margin: 10px;
+  font-size: 20px;
+  color: rgb(0, 0, 255);
+  font-weight: 1000;
+}
+
+.card {
+  display: grid;
+  margin: 10px;
+  border: 1px solid gray;
+  border-radius: 10px;
+  padding: 10px;
+  gap: 10px;
+  box-shadow: 3px 3px 3px #646464;
+}
+
+.header2 {
+  font-size: 15px;
+}
+
+.horizont {
+  display: flex;
+  gap: 10px;
+}
+
+.horizont2 {
+  display: grid;
+  gap: 5px;
+}
+.horizont2 .input {
+  width: 100%;
+  padding: 5px;
+  border: 1px solid gray;
+  border-radius: 10px;
+}
+.horizont2 .text-mini {
+  font-size: 10px;
+}
+
+.name {
+  display: grid;
+  gap: 5px;
+  width: 50%;
+}
+
+.input__mini {
+  padding: 3px;
+  width: 100%;
+  border: 1px solid gray;
+  border-radius: 5px;
+}
+
+.button {
+  padding: 5px;
+  background: blue;
+  color: #fff;
+  border: 1px solid blue;
+  border-radius: 5px;
+  text-decoration: none;
+}
+
+.button:hover {
+  opacity: 0.7;
+}
+
+.button:active {
+  opacity: 0.3;
+}
+
+/*# sourceMappingURL=style.css.map */

@@ -1,0 +1,85 @@
+.product_list {
+  font-family: "Roboto", sans-serif;
+  margin: 15px;
+  padding: 10px;
+  border: 1px solid gray;
+  border-radius: 10px;
+  display: grid;
+  gap: 10px;
+  box-shadow: 3px 3px 3px #646464;
+}
+
+.product_card {
+  display: grid;
+  gap: 10px;
+}
+
+.name {
+  font-size: 14px;
+}
+
+.title {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.horizont {
+  display: flex;
+  gap: 10px;
+}
+
+.input__mini {
+  border: 1px solid gray;
+  padding: 5px;
+}
+
+.inp_max {
+  display: grid;
+}
+
+.descr {
+  display: grid;
+  gap: 5px;
+}
+
+.input__max {
+  border: 1px solid gray;
+  padding: 5px;
+  width: 100%;
+}
+
+.button {
+  display: flex;
+  gap: 10px;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.card_button {
+  padding: 10px 0;
+  text-decoration: none;
+  color: #fff;
+  width: 100%;
+  border: 1px solid #fff;
+  display: flex;
+  justify-content: center;
+  border-radius: 5px;
+}
+
+.card_button:hover {
+  opacity: 0.7;
+}
+
+.card_button:active {
+  opacity: 0.3;
+}
+
+.card_button_save {
+  background-color: blue;
+}
+
+.card_button_delete {
+  background-color: red;
+}
+
+/*# sourceMappingURL=style.css.map */

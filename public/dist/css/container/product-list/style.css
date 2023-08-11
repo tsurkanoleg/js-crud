@@ -1,0 +1,58 @@
+.product_list {
+  font-family: "Roboto", sans-serif;
+  display: grid;
+  gap: 15px;
+  padding: 15px;
+}
+
+.title {
+  font-size: 20px;
+  color: blue;
+}
+
+.card_list {
+  gap: 10px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.product_card {
+  padding: 10px;
+  width: 30%;
+  display: grid;
+  gap: 12px;
+  border: 1px solid gray;
+  border-radius: 10px;
+  box-shadow: 3px 3px 3px #646464;
+}
+
+.card_title {
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.card_body {
+  font-size: 12px;
+}
+
+.id {
+  color: gray;
+}
+
+.horizont {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card_price {
+  font-size: 15px;
+  font-weight: 800;
+}
+
+.card_button {
+  text-decoration: none;
+  font-size: 10px;
+}
+
+/*# sourceMappingURL=style.css.map */
