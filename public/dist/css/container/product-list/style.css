@@ -16,9 +16,10 @@
   flex-wrap: wrap;
 }
 
-.product_card {
+.product__card {
   padding: 10px;
   width: 30%;
+  min-width: 300px;
   display: grid;
   gap: 12px;
   border: 1px solid gray;

@@ -8,27 +8,30 @@
 	<div class="product_list">
 		<h2 class="title">Список товарів</h2>
 			
+	
 		<div class="card_list">
-			<div class="product_card">
-				
+		<div class="product_card">
+			{{#with data.products}}
 				{{#if isEmpty}}
 					<mark>Пустий</mark>
-				{{else}}
-					{{#with Product}}
-						<div class="product__card">
-							<div class="card_title">{{name}}</div>
-							<div class="card_body">{{description}}</div>
-							<div class="id">ID: {{id}}</div>
-							<div class="horizont">
-								<div class="card_price">{{price}} $</div>
-								<button class="card_button"><a href="/product-edit">Редагувати</a></button>
+				{{else}}						
+						<div class="card_list">
+							{{#each list}}
+							<div class="product__card">
+								<div class="card_title">{{name}}</div>
+								<div class="card_body">{{description}}</div>
+								<div class="id">ID: {{id}}</div>
+								<div class="horizont">
+									<div class="card_price">{{price}} $</div>
+									<button><a class="card_button" href="/product-edit?id={{id}}">Редагувати</a></button>
+								</div>
 							</div>
-						</div>
-					{{/with}}
+								{{/each}}
+						</div>						
 				{{/if}}
-			
-			</div>
+			{{/with}}
 		</div>
+	</div>
 
 
 

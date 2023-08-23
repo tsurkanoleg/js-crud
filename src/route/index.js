@@ -82,27 +82,17 @@ router.get('/', function (req, res) {
 
 // ================================================================
 
-// router.get Створює нам один ентпоїнт
-
-// ↙️ тут вводимо шлях (PATH) до сторінки
-
-s
-
 
 router.post('/product-create', function (req, res) {
-	const list = Product.getList()
+	
   const { name, price, description } = req.body
   const product = new Product(name, price, description)
   Product.add(product)
   console.log(Product.getList())
-  res.render('product-alert', {
-    style: 'product-alert',
-		data: {
-			products: {
-				list,
-				isEmpty: list.length === 0,
-			}
-		}
+  res.render('product-create', {
+    style: 'product-create',
+		// d
+		info: 'Товар успішно додано',
   })
 })
 
@@ -113,6 +103,7 @@ router.post('/product-create', function (req, res) {
 // ================================================================
 
 router.get('/product-create', function (req, res) {
+	const list = Product.getList()
   res.render('product-create', {
     style: 'product-create',
   })
@@ -127,7 +118,7 @@ router.get('/product-list', function (req, res) {
   res.render('product-list', {
     style: 'product-list',
     data:{
-      product:{
+      products:{
         list,
         isEmpty: list.length === 0
       }
@@ -160,8 +151,8 @@ router.get('/product-edit', function (req, res) {
         },
       })
     } else {
-      return res.render('/product-edit', {
-        style: 'product-edit',
+      return res.render('/product-alert', {
+        style: 'product-alert',
         info: 'Продукту за таким ID не знайдено',
       })
     }
@@ -177,8 +168,8 @@ router.post('/product-edit', function (req, res) {
     price,
     description,
   })
-  console.log(id)
-  console.log(product)
+  // console.log(id)
+  // console.log(product)
 
   if (product) {
     
