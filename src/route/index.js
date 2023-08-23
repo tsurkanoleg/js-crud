@@ -89,30 +89,14 @@ router.get('/', function (req, res) {
 // router.get Створює нам один ентпоїнт
 
 // ↙️ тут вводимо шлях (PATH) до сторінки
-router.get('/product-create', function (req, res) {
-  const list = Product.getList()
+router.post('/product-create', function (req, res) {
+  console.log(req.body)
   res.render('product-create', {
     
     style: 'product-create',
   })
 })
 
-// ================================================================
-
-router.post('/product-create', function (req, res) {
-  const {name, price, description} = req.body;
-
-  const product = new Product(name, price, description);
-
-  Product.add(product)
-
-  console.log(Product.getList)
-
-  res.render('product-alert', {
-    style: 'product-alert',
-    info:"Товар успішно доданий"
-  })
-})
 
 // ================================================================
 
@@ -155,8 +139,8 @@ router.get('/product-edit', function (req, res) {
         },
       })
     } else {
-      return res.render('product-alert', {
-        style: 'product-alert',
+      return res.render('/product-edit', {
+        style: 'product-edit',
         info: 'Продукту за таким ID не знайдено',
       })
     }

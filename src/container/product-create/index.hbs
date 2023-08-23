@@ -1,32 +1,36 @@
-{{! 
+ {{! 
 Це код container файлу для index сторінки, 
 в якому міститься код, котрий буде віддаватися по шляху (PATH) - "/"
  }}
 
 <body>
-	<form method="POST" action="/product-create">
-		<header class="header">Створення товару</header>
-		<div class="card">
-			<h2 class="header2">Інформація про товар</h2>
-			<div class="horizont">
-				<div class="name">
-					<p class="name">Назва товару</p>
-					<input class="input__mini" name="Name" placeholder="Введіть назву товару">
-				</div>
-				<div class="name">
-					<p class="name">Ціна</p>
-					<input class="input__mini" name="Price" placeholder="Введіть ціну товару"  type="number">
-				</div>
-			</div>
-			<div class="horizont2">
-				<p class="name">Короткий опис товару</p>
-				<input class="input" name="Description" placeholder="Введіть назву товару">
-				<p class="text-mini">Відображується у картці товару</p>
-			</div>
 
-			<button class="button">Створити зараз</button>
-		</div>
-	</form>
+	<form method="POST" action="/product-create">
+		<h1 class="header">Створення товару</h1>
+        <div class="form__content">
+			<h2 class="header2">Інформація про товар</h2>
+
+          <div class="form__row">
+				<div class="form__field">
+					<label for="name" class="form__label">Назва товару</label>
+					<input type="text" name="name" class="form__input">
+				</div>
+				<div class="form__field">
+					<label for="price" class="form__label">Ціна</label>
+					<input type="number" name="price" class="form__input">
+				</div>
+          </div>
+
+          <div class="form__field">
+            <label for="description" class="form__label">Короткий опис товару</label>
+            <textarea class="form__input" id="description" name="description" rows="3"></textarea>
+            <span class="form__message">Відображається у картці товару</span>
+          </div>
+          <button class="form__button">Створити товар</button>
+        </div>
+      </form>
+
+
 </body>
 
 {{! 
