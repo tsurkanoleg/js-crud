@@ -7,49 +7,24 @@
 <form method="POST" action="/product-list">
 	<div class="product_list">
 		<h2 class="title">Список товарів</h2>
-	
-
-		{{!-- <div class="card_list">
-			<div class="product_card">
-				{{#with data.products}}
-				{{#if isEmpty}}
-					<mark>Пустий</mark>
-				{{else}}
-					{{#each list}}
-						<div class="product__card">
-							<div class="card_title">{{name}}</div>
-							<div class="card_body">{{description}}</div>
-							<div class="id">ID: {{id}}</div>
-							<div class="horizont">
-								<div class="card_price">{{price}}$</div>
-								<button class="card_button"><a href="/product-edit?id={id}}">Редагувати</a></button>
-							</div>
-						</div>
-					{{/each}}
-				{{/if}}
-			{{/with}}
-			</div>
-		</div> --}}
-
-
-		
+			
 		<div class="card_list">
 			<div class="product_card">
 				
 				{{#if isEmpty}}
 					<mark>Пустий</mark>
 				{{else}}
-					
+					{{#with Product}}
 						<div class="product__card">
-							<div class="card_title">name</div>
-							<div class="card_body">description</div>
-							<div class="id">ID: id</div>
+							<div class="card_title">{{name}}</div>
+							<div class="card_body">{{description}}</div>
+							<div class="id">ID: {{id}}</div>
 							<div class="horizont">
-								<div class="card_price">price $</div>
+								<div class="card_price">{{price}} $</div>
 								<button class="card_button"><a href="/product-edit">Редагувати</a></button>
 							</div>
 						</div>
-					
+					{{/with}}
 				{{/if}}
 			
 			</div>
