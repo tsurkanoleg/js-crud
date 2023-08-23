@@ -168,18 +168,17 @@ router.post('/product-edit', function (req, res) {
     price,
     description,
   })
-  // console.log(id)
-  // console.log(product)
+  console.log(id)
+  console.log(product)
 
-  if (product) {
-    
-    res.render('product-edit', {
-      style: 'product-edit',
+  if (product) {    
+    res.render('product-alert', {
+      style: 'product-alert',
       info: 'Інформація про товар оновлена',
     })
   } else {
-    res.render('product-edit', {
-      style: 'product-edit',
+    res.render('product-alert', {
+      style: 'product-alert',
       info: 'Сталася помилка',
     })
   }
