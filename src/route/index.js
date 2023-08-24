@@ -5,134 +5,178 @@ const router = express.Router()
 
 // ================================================================
 
-class User {
-	static #list = [];
+class Product {
+	static #list = []
 
-	constructor(email, login, password) {
-		this.email = email
-		this.login = login
-		this.password = password
-		this.id = new Date().getTime()
+	static #count = 0
+
+	constructor(img, title, description, category, price) {
+		this.id = ++Product.#count // генерує унікальний id
+		this.img = img
+		this.title = title
+		this.description = description
+		this.category = category
+		this.price = price
 	}
 
-  verifyPassword = (password) => this.password === password
-	
-	static add = (user) => {
-		this.#list.push(user)
+	static add = (img, title, description, category, price) => {
+		const newProduct = new Product(img, title, description, category, price)
+
+		this.#list.push(newProduct)
 	}
 
-	static getList = () => this.#list
+	static getList = () => {
+		return this.#list
+	}
 
-  static getById = (id) => 
-    this.#list.find((user) => user.id === id)
+	static getById = (id) => {
+		return this.#list.find((product) => product.id === id)
+	}
 
-  static deleteById = (id) => {
-    const index = this.#list.findIndex(
-      (user) =>user.id === id,
-    )
-    if (index !== -1) {
-      this.#list.splice(index, 1)
-      return true
-    } else {
-      return false
-    }
-  }
+	static getRandomList = (id) => {
+		// фільтруємо товари, щоб вилучити той з яким порівнюємо id
+		const filtredList = this.#list.filter(
+			(product) => product.id !== id,
+		)
 
-  static updateById = (id, data) => {
-    const user = this.getById(id)
+		// Відсортовуємо за допомогою Math.random() та переміщаємо масив
+		const shufledList = filtredList.sort(
+			() => Math.random() - 0.5,
+		) 
 
-    if(user) {
-      this.update(user, data)
+		// Повертаємо перші 3 елементи з перемішаного масиву
+		return shufledList.slice(0, 3)
 
-      return true
-    } else {
-      return false
-    }
-  }
-
-  static update = (user, {email}) => {
-    if(email) {
-      user.email = email
-    }
-  }
+	}
 }
 
+Product.add(
+	'https://picsum.photos/200/300',
+	'Комп`ютер ARTLINE Gaming',
+	'AMD rysen 5 3600(3.6 - 4.2 ГГц)',
+	[
+		{id:1, text:'Готовий йдо відправки'},
+		{id:2, text:'Топ продаж'},
+	],
+	27000
+)
+
+
+Product.add(
+	'https://picsum.photos/200/300',
+	'Комп`ютер ARTLINE ',
+	'AMD rysen 5 3600(2.6 - 4.2 ГГц)',
+	[
+		{id:2, text:'Топ продаж'},
+	],
+	20000
+)
+
+
+
+Product.add(
+	'https://picsum.photos/200/300',
+	'Комп`ютер  Gaming',
+	'AMD rysen 5 3600(3.6 - 4.0 ГГц)',
+	[
+		{id:1, text:'Готовий йдо відправки'},
+	],
+	37000
+)
+
+
 // ================================================================
 
-// router.get Створює нам один ентпоїнт
-
-// ↙️ тут вводимо шлях (PATH) до сторінки
 router.get('/', function (req, res) {
-  // res.render генерує нам HTML сторінку
 
-  const list = User.getList()
+  res.render('purchase-index', {
+   
+    style: 'purchase-index',	
 
-  // ↙️ cюди вводимо назву файлу з сontainer
-  res.render('index', {
-    // вказуємо назву папки контейнера, в якій знаходяться наші стилі
-    style: 'index',
-
-	data: {
-		users: {
-			list,
-			isEmpty: list.length === 0,
+		data: {list: Product.getList(),
 		},
-	},	
   })
-  // ↑↑ сюди вводимо JSON дані
 })
 
 // ================================================================
 
-router.post('/user-create', function (req, res) {
-	const {email, login, password} = req.body;
+router.get('/purchase-product', function (req, res) {
+	const id = Number(req.query.id)
 
-	const user = new User(email, login, password);
+  res.render('purchase-product', {
+   
+    style: 'purchase-product',	
 
-	User.add(user);
-
-	console.log(User.getList())
-
-	res.render('success-info', {	  
-	  style: 'success-info',
-    info: "user created",
-	})
+		data: {list: Product.getRandomList(id),
+			product: Product.getById(id),
+		},
+  })
 })
 
 // ================================================================
 
-	router.get('/user-delete', function (req, res) {
-		const {id} = req.query
 
-    User.deleteById(Number(id));
-		
-		res.render('success-info', {	  
-		style: 'success-info',
-    info: "user delited",
-		})
+router.post('/purchase-create', function (req, res) {
+	const id = Number(req.query.id)
+	const amount = Number(req.body.amount)
+
+	console.log(id, amount)
+
+  res.render('purchase-product', {
+   
+    style: 'purchase-product',	
+
+		data: {
+			list: Product.getRandomList(id),
+			product: Product.getById(id),
+		},
   })
+})
 
-  // ================================================================
+// ================================================================
 
-	router.post('/user-update', function (req, res) {
-		const {email, password, id} = req.body
 
-    let result = false
+router.get('/test-path', function (req, res) {
 
-    const user = User.getById(Number(id))
+  res.render('alert', {
+   
+    style: 'alert',	
 
-    if (user.verifyPassword(password)) {
-      User.update(user, {email})
-      result = true;
-    } 
-		
-		res.render('success-info', {	  
-		style: 'success-info',
-    info: result 
-    ? "Email updates" 
-    : "Error",
-		})
+		data: {
+			message:' Операція успішна',
+			info: 'Товар створений',
+			link: '/test-path',			
+		},
   })
+})
+
+// ================================================================
+
+// router.get('/', function (req, res) {
+
+//   res.render('purchase-index', {
+   
+//     style: 'purchase-index',	
+
+// 		data: {
+// 			img:'https://picsum.photos/200/300',
+// 			title: 'Компьютер ARTLINE Gaming',
+// 			description: 'AMD rysen 5 3600(3.6 - 4.2 ГГц)',			
+// 			category : [
+// 				{id:1, text:'Готовий йдо відправки'},
+// 				{id:2, text:'Топ продаж'},
+// 			],
+// 			price: 2700,
+// 		},
+//   })
+// })
+
+
+
+
+
+// ================================================================
+
 
 // Підключаємо роутер до бек-енду
 module.exports = router

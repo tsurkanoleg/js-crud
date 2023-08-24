@@ -1,0 +1,56 @@
+{{! 
+Це код container файлу для index сторінки, 
+в якому міститься код, котрий буде віддаватися по шляху (PATH) - "/"
+ }}
+
+<main class="main">
+	{{> heading title="Товари" info="Комп'ютери, ноутбуки, моноблоки..." }}
+
+	{{!-- <div class="product-list">
+		{{> purchase-product data=data}}
+		{{> purchase-product data=data}}
+		{{> purchase-product data=data}}
+	</div>
+	 --}}
+
+	 {{!-- <div class="product-list">
+		{{#each data.list}} 
+		{{> purchase-product data=this}}
+		{{/each}}
+	 </div> --}}
+
+	 <main class="main">
+		{{> heading title="Інші товари" info="Комп'ютери та ноутбуки" }}
+
+		
+		<div class="product-list">
+			{{#each data.list}} 
+			{{> purchase-product data=this}}
+			{{/each}}
+		</div>
+		
+	</main>
+
+
+	 {{!-- {{#with data.product}}
+		<form method="POST" action="/purchase-create&id={{id}}">
+			<div class="product__info">
+				
+				<img src="{{img}}" alt="Товар 1" class="productt__info__image">
+				<h2 class="product__info__title">{{title}}</h2>
+				<p class="product__info__subtitle">{{description}}</p>
+				{{#each category}}
+					<span class="product__info__category product__info__category--{{id}}">{{text}}</span>
+				{{/each}}
+				<a href="/purchase-product?id={{id}}" class="product__info__button">Купити зараз: {{price}} грн</a>
+
+			</div>
+		</form>
+	{{/with}} --}}
+	
+</main>
+
+{{! 
+    Цей код містить лише те, що буде виводитись в <body>
+    Адже наш layout/default.hbs має вже структуру HTML
+}}
