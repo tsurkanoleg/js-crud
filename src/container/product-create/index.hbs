@@ -10,24 +10,27 @@
 		<h1 class="header">Створення товару</h1>
 		<div class="form__content">
 			<h2 class="header2">Інформація про товар</h2>
-
-				<div class="form__row">
-					<div class="form__field">
-					<label for="name" class="form__label">Назва товару</label>
-					<input type="text" name="name" class="form__input">
-				</div>
+		
+			<div class="form__row">
 				<div class="form__field">
-					<label for="price" class="form__label">Ціна</label>
-					<input type="number" name="price" class="form__input">
-				</div>
+				<label for="name" class="form__label">Назва товару</label>
+				<input type="text" name="name" class="form__input">
 			</div>
+			<div class="form__field">
+				<label for="price" class="form__label">Ціна</label>
+				<input type="number" name="price" class="form__input">
+			</div>
+		</div>
+
+		
 
 			<div class="form__field">
 				<label for="description" class="form__label">Короткий опис товару</label>
 				<textarea class="form__input" id="description" name="description" rows="3"></textarea>
 				<span class="form__message">Відображається у картці товару</span>
 			</div>
-			<button class="form__button"><a href="/product-alert" class="form__button">Створити товар</a></button>
+			{{!-- <button class="form__button">Створити товар</button> --}}
+			<button class="form__button"><a href="/product-list" class="form__button">Створити товар</a></button>
 		</div>
 	</form>
 </section>

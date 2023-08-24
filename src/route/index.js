@@ -10,8 +10,9 @@ class Product {
 
   constructor(name, price, description,) {   
 	this.id = Math.floor(Math.random() * 100000);
-	this.createDate = new Date().toISOString()
-	  
+	this.createDate = () => {
+		this.date = new Date().toISOString()
+	}	  
     this.name = name;
     this.price = price;
     this.description = description;
@@ -25,10 +26,6 @@ class Product {
 
   static getById = (id) =>
   this.#list.find((product) => product.id === id)
-
-  // static updateById = (id, data) => {
-  // const product = this.getById(id)
-  // }
 
 	static deleteById = (id) => {
     const index = this.#list.findIndex(
@@ -44,18 +41,39 @@ class Product {
 
   static updateById(id, data) {
     const product = this.getById(id);
-    if (product) {
-      if (data.name) product.name = data.name;
-      if (data.price) product.price = data.price;
-      if (data.description) product.description = data.description;
-      return product;
-    } else {
-      return false;
-    }
+
+		const { name, price } = data;
+		if (product) {
+			if (name) {
+				product.name = name
+			} else if (price) {
+				product.price = price
+			}
+			return true
+		} else {
+			return false
+		}
+
+
+    // if (product) {
+    //   if (data.name) product.name = data.name;
+    //   if (data.price) product.price = data.price;
+    //   if (data.description) product.description = data.description;
+    //   return product;
+    // } else {
+    //   return false;
+    // }
         
   }
 
-
+	static update = (name, price, { product }) => {
+		if (name) {
+		product.name = name
+		} else if (price) {
+		product.price = price
+		}
+	}
+	
 
 
 }
@@ -120,9 +138,9 @@ router.get('/product-list', function (req, res) {
     data:{
       products:{
         list,
-        isEmpty: list.length === 0
-      }
-    }
+        isEmpty: list.length === 0,
+      },
+    },
   })
 })
 
@@ -143,11 +161,11 @@ router.get('/product-edit', function (req, res) {
   if (product) {
     return res.render('product-edit', {
         style: 'product-edit',
-        data: {
-          name: product.name,
-          price: product.price,
-          id: product.id,
-          description: product.description,
+				data: {
+					name: product.name,
+					price: product.price,
+					id: product.id,
+					description: product.description,
         },
       })
     } else {

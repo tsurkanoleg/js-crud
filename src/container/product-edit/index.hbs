@@ -7,37 +7,68 @@
 <form method="POST" action="/product-edit">
 	<div class="product_list">
 		<h2 class="title">Інформація про товар</h2>
-				
-		<div class="product_card">
-			<div class="horizont">
-				<div class="name">
-					<p class="name">{{data.name}}</p>
-					<input class="input__mini" name="Name" placeholder="Введіть назву товару">
+		{{#with data}}	
+			<div class="product_card">
+				<div class="horizont">
+					<div class="name">
+						<p class="name">{{name}}</p>
+						<input class="input__mini" name="name" placeholder="Введіть назву товару">
+					</div>
+					<div class="name">
+						<p class="name">{{price}}</p>
+						<input class="input__mini" name="price" placeholder="Введіть ціну товару" type="number">
+					</div>
+					<div class="name">
+						<p class="name">{{id}}</p>
+						<input class="input__mini" name="id" placeholder="Введіть ID товару" type="number">
+					</div>
 				</div>
-				<div class="name">
-					<p class="name">{{data.price}}</p>
-					<input class="input__mini" name="Price" placeholder="Введіть ціну товару"  type="number">
-				</div>
-				<div class="name">
-					<p class="name">{{data.id}}</p>
-					<input class="input__mini" name="Price" placeholder="Введіть ID товару"  type="number">
-				</div>
-			</div>		
 
-			<div class="inp_max">
-				<div class="descr">
-					<p class="name">{{data.description}}</p>
-					<input class="input__max" name="Name" placeholder="Введіть опис товару">
+				<div class="inp_max">
+					<div class="descr">
+						<p class="name">{{description}}</p>
+						<input class="input__max" name="Name" placeholder="Введіть опис товару">
+					</div>
+					<p class="description">Відображується в картці товару</p>
 				</div>
-				<p class="description">Відображується в картці товару</p>
-			</div>	
 
-			<div class="button">
-				<a href="/product-edit?id={{id}}" class="card_button card_button_save">Зберегти оновлення</a>
-				<a href="/product-edit?id={{id}}" class="card_button card_button_delete">Видалити товар</a>
+				<div class="button">
+					<button class="card_button card_button_save">Зберегти оновлення</button>
+					<a href="/product-delete?id={{id}}" class="card_button card_button_delete">Видалити товар</a>
+				</div>
+				</div>
+
 			</div>
-		</div>
-		
+			{{!-- <div class="product_card">
+				<div class="horizont">
+					<div class="name">
+						<p class="name">{{name}}</p>
+						<input class="input__mini" name="Name">
+					</div>
+					<div class="name">
+						<p class="name">{{price}}</p>
+						<input class="input__mini" name="Price" type="number">
+					</div>
+					<div class="name">
+						<p class="name">{{id}}</p>
+						<input class="input__mini" name="Price" type="number">
+					</div>
+				</div>		
+
+				<div class="inp_max">
+					<div class="descr">
+						<p class="name">{{description}}</p>
+						<input class="input__max" name="Name">
+					</div>
+					<p class="description">Відображується в картці товару</p>
+				</div>	
+
+				<div class="button">
+					<a href="/product-edit?id={{id}}" class="card_button card_button_save">Зберегти оновлення</a>
+					<a href="/product-edit?id={{id}}" class="card_button card_button_delete">Видалити товар</a>
+				</div>
+			</div> --}}
+		{{/with}}
 	</div>
 </form>
 
