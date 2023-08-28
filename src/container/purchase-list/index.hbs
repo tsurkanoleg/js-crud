@@ -30,7 +30,8 @@
 		{{> divider}}
 	</div> --}}
 
-	<section class='purchase-list'>
+	<section class='purchase-list my-purchase'>
+		<div class="header">Мої замовлення</div>
     {{#with data.purchases}}
       {{#each list}}
          <a href='/purchase-info?id={id}}'>
