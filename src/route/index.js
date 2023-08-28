@@ -97,38 +97,38 @@ Product.add(
 
 class Purchase {
 	static DELIVERY_PRICE = 150
-	static#BONUS_FACTOR = 0.1
+  static #BONUS_FACTOR = 0.1
 
-	static #count = 0
-	static #list = []
+  static #count = 0
+  static #list = []
 
-	static #bonusAccount = new Map()
+  static #bonusAccount = new Map()
 
-	static getBonusBalanse = (email) => {
-		return Purchase.#bonusAccount.get(email) || 0
-	}
+	static getBonusBalance = (email) => {
+    return Purchase.#bonusAccount.get(email) || 0
+  }
 
 	static calcBonusAmount = (value) => {
-		return value * Purchase.#BONUS_FACTOR
-	}
+    return value * Purchase.#BONUS_FACTOR
+  }
 
 	static updateBonusBalance = (
-		email,
-		price,
-		bonusUse = 0,
-	) => {
-		const amount = this.calcBonusAmount(price)
+    email,
+    price,
+    bonusUse = 0,
+  ) => {
+    const amount = this.calcBonusAmount(price)
 
-		const currentBalance = Purchase.getBonusBalanse(email)
+    const currentBalance = Purchase.getBonusBalance(email)
 
-		const updateBalance = currentBalance + amount - bonusUse
+    const updatedBalance = currentBalance + amount - bonusUse
 
-		Purchase.#bonusAccount.set(email, updateBalance)
+    Purchase.#bonusAccount.set(email, updatedBalance)
 
-		console.log(email, updateBalance)
+    console.log(email, updatedBalance)
 
-		return amount
-	}
+    return amount
+  }
 
 	constructor(data, product) {
 		this.id = ++Purchase.#count
@@ -138,16 +138,19 @@ class Purchase {
 
 		this.phone = data.phone
 		this.email = data.email
+		this.delivery = data.delivery
 
 		this.comment = data.comment || null
+
 		this.bonus = data.bonus | 0
+
 		this.promocode = data.promocode || null
 
 		this.totalPrice = data.totalPrice
 		this.productPrice = data.productPrice
 		this.deliveryPrice = data.deliveryPrice
-		this.amount = data.amount
 
+		this.amount = data.amount
 		this.product = product
 	}
 
@@ -156,17 +159,32 @@ class Purchase {
 
 		this.#list.push(newPurchase)
 
+		newPurchase.product.amount -= newPurchase.amount
+
 		return newPurchase
 	}
 
+	// static getList = () => {
+	// 	return Purchase.#list.reverse().map((purchase) => {
+	// 		id, 
+	// 		name, 
+	// 		totalPrice, 
+	// 		bonus 
+	// 	}) // Через дуструктуризацію витягуємо необхідні дані  і повертаємо в об'єкт
+	// }
+
+
 	static getList = () => {
-		return Purchase.#list.reverse().map((id, name, totalPrice, bonus ) => {
-			id, 
-			name, 
-			totalPrice, 
-			bonus 
-		}) // Через дуструктуризацію витягуємо необхідні дані  і повертаємо в об'єкт
-	}
+    return Purchase.#list.reverse().map((purchase) => ({
+      id: purchase.id,
+      product: purchase.product.title,
+      totalPrice: purchase.totalPrice,
+      bonus: Purchase.calcBonusAmount(purchase.totalPrice),
+    }))
+  }
+
+
+
 
 	static getById = (id) => {
 		return Purchase.#list.find((item) => item.id === id)
@@ -176,10 +194,11 @@ class Purchase {
 		const purchase = Purchase.getById(id)
 
 		if(Purchase) {
-			if(data.firstname) purchase.firstname = data.firstname
-			if(data.lastname) purchase.lastname = data.lastname
-			if(data.phone) purchase.phone = data.phone
-			if(data.email) purchase.email = data.email
+			if (data.firstname)	purchase.firstname = data.firstname
+		if (data.lastname) purchase.lastname = data.lastname
+		if (data.phone) purchase.phone = data.phone
+		if (data.email) purchase.email = data.email
+		if (data.delivery) purchase.delivery = data.delivery
 
 			return true
 		} else {
@@ -490,6 +509,9 @@ router.get('/purchase-info', function (req, res) {
 	
    
     style: 'purchase-info',	
+		// component: ['heading', 'divider', 'button'],
+
+		// title: 'Інформація про замовлення',
 
 		data: {
 			purchaseId: Purchase.id,
@@ -500,11 +522,11 @@ router.get('/purchase-info', function (req, res) {
 			
 			deliveryAddress: "вул. Центральна 14, кв. 36, м. Київ, 02000, Україна",
 
-			productName: Product.title,
+			productName: Purchase.product.title,
       productPrice: Purchase.productPrice,
       deliveryPrice: Purchase.deliveryPrice,
       totalPrice: Purchase.totalPrice,
-      bonusEarned: Purchase.bonus,
+      bonus: bonus,
 		}
 		
   })
@@ -519,6 +541,13 @@ router.get('/purchase-edit', function (req, res) {
    
     style: 'purchase-edit',	
 
+		data: {
+			purchaseId: Purchase.id,
+      firstname: Purchase.firstname,
+      lastname: Purchase.lastname,
+      phone: Purchase.phone,
+      email: Purchase.email,		
+		}
 		
   })
 })

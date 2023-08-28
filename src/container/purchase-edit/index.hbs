@@ -7,7 +7,7 @@
 	<main class="main">
 		
 			<form method="POST" action="/purchase-edit?id={{ID}}" class="form-card">
-				{{> heading title="Інформація про замовлення"}}
+				{{> heading title="Зміна данних"}}
 
 		 
 				<div class="id">ID: {{ID}} </div>
@@ -15,22 +15,18 @@
 				<div class="col">
 					<div class="row">
 						<div class="col">
-							{{> field-info label="Ім'я" name="firstname" }}
-							<p class="name">{{data.firstname}}</p>
+							{{> field label="Ім'я" name="firstname"}}
 						</div>
 						<div class="col">
-							{{> field-info label="Прізвище" name="lastname"}}
-							<p class="name">{{data.lastname}}</p>
+							{{> field label="Прізвище" name="lastname"}}
 						</div>
 					</div>
 					<div class="row">
 						<div class="col">
-							{{> field-info label="Телефон" name="phone"}}
-							<p class="name">{{data.phone}}</p>
+							{{> field label="Телефон" name="phone"}}
 						</div>
 						<div class="col">
-							{{> field-info label="Пошта" name="email"}}
-							<p class="name">{{data.email}}</p>
+							{{> field label="Пошта" name="email"}}
 						</div>
 					</div>
 				</div>
