@@ -1,0 +1,65 @@
+{{! 
+Це код container файлу для index сторінки, 
+в якому міститься код, котрий буде віддаватися по шляху (PATH) - "/"
+ }}
+
+<main>
+
+	{{!-- <div class="my-purchase">
+		{{> heading title="Мої замовлення"}}
+
+		{{#with data}}
+		<form method="POST" action="/my-purchase" class="form-card">
+			<div class="row">
+				<p>ID: </p>
+				<div class="col">
+					<p>Товар</p>
+					<p> {{text}} </p>
+				</div>
+				<div class="col">
+					<p>Сума замовлення</p>
+					<p> {{totalPrice}} </p>
+				</div>
+				<div class="col">
+					<p>Нараховані бонуси</p>
+					<p> {{bonus}} </p>
+				</div>
+			</div>
+			</form>
+		{{/with}}
+		{{> divider}}
+	</div> --}}
+
+	<section class='purchase-list'>
+    {{#with data.purchases}}
+      {{#each list}}
+         <a href='/purchase-info?id={id}}'>
+					<div class='purchase-item row'>
+						<div class='purchase-item__block'>
+							<span class='title'>ID: {{id}}</span>
+						</div>
+						<div class='purchase-item__block col'>
+							<span class='title'>Товари</span>
+							<span class='text'>{{product}}</span>
+						</div>
+						<div class='purchase-item__block col'>
+							<span class='title'>Сума замовлення</span>
+							<span class='text'>{{totalPrice}} грн</span>
+						</div>
+						<div class='purchase-item__block col'>
+							<span class='title'>Нараховані бонуси</span>
+							<span class='text'>{{bonus}} грн</span>
+						</div>
+					</div>
+				</a>
+        {{> divider}}
+      {{/each}}
+    {{/with}}
+  </section>
+	
+</main>
+
+{{! 
+    Цей код містить лише те, що буде виводитись в <body>
+    Адже наш layout/default.hbs має вже структуру HTML
+}}

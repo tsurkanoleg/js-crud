@@ -484,18 +484,27 @@ router.post('/purchase-submit', function (req, res) {
 
 // ================================================================
 
-router.get('/my-purchase', function (req, res) {
+router.get('/purchase-list', function (req, res) {
+	const list = Purchase.getList()
+  // console.log('purchase-list:', list)
 
-  res.render('my-purchase', {
+  res.render('purchase-list', {
    
-    style: 'my-purchase',	
+    style: 'purchase-list',	
 
 		data: {
-			ID: Purchase.getList.getById,
-			name: Purchase.getList.title,
-			totalPrice: Purchase.getList.totalPrice,
-			bonus: Purchase.getList.bonus, 
-		}	 
+      purchases: {
+        list,
+      },
+      // bonus, // Отримати bonusAmount з параметрів URL
+    },
+
+		// data: {
+		// 	ID: Purchase.getList.getById,
+		// 	name: Purchase.getList.title,
+		// 	totalPrice: Purchase.getList.totalPrice,
+		// 	bonus: Purchase.getList.bonus, 
+		// }	 
 
 		
   })
@@ -540,6 +549,7 @@ router.get('/purchase-edit', function (req, res) {
   res.render('purchase-edit', {
    
     style: 'purchase-edit',	
+		title: 'Зміна данних',
 
 		data: {
 			purchaseId: Purchase.id,
