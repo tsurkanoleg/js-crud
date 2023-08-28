@@ -1,0 +1,21 @@
+@use '../../lib/service.scss' as s;
+
+@use '../../component/heading/style.scss' as heading;
+@use '../../component/purchase-product/style.scss' as purchaseProduct;
+@use '../../component/divider/style.scss' as divider;
+
+.my-purchase {
+	margin: 20px;
+	display: grid;
+	gap: 40px;
+}
+
+.row {
+	display: flex;
+	justify-content: space-between;
+}
+
+.col {
+	display: grid;
+	gap: 15px;
+}

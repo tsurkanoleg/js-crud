@@ -1,0 +1,100 @@
+{{! 
+Це код container файлу для index сторінки, 
+в якому міститься код, котрий буде віддаватися по шляху (PATH) - "/"
+ }}
+
+
+	<main class="main">
+		
+			<form method="POST" action="/purchase-edit?id={{ID}}" class="form-card">
+				{{> heading title="Інформація про замовлення"}}
+
+		 
+				<div class="id">ID: {{ID}} </div>
+
+				{{> divider}}
+
+											
+				<div class="col">
+					<div class="row">
+						<div class="col">
+							{{> field-info label="Ім'я" name="firstname" }}
+							<p class="name">{{data.firstname}}</p>
+						</div>
+						<div class="col">
+							{{> field-info label="Прізвище" name="lastname"}}
+							<p class="name">{{data.lastname}}</p>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col">
+							{{> field-info label="Телефон" name="phone"}}
+							<p class="name">{{data.phone}}</p>
+						</div>
+						<div class="col">
+							{{> field-info label="Пошта" name="email"}}
+							<p class="name">{{data.email}}</p>
+						</div>
+					</div>
+				</div>
+
+				{{> divider}}
+
+				<div class="col1">
+					{{> field-info label="Адреса доставки:" name="adress"}}
+					<p class="name">{{data.deliveryAddress}}</p>
+				</div>
+
+				<div class="col1">
+					{{> field-info label="Назва товару:" name="nameProduct"}}
+					<p class="name">{{data.productName}}</p>
+				</div>
+
+				{{> divider}}
+
+				<div class="col">
+					<div class="row">
+						<div class="col">
+							{{> field-info label="Вартість товарів:" name="promocode"}}
+							<p class="name">{{data.productPrice}}</p>
+						</div>
+						<div class="col">
+							{{> field-info label="Вартість доставки:" name="promocode"}}
+							<p class="name">{{data.deliveryPrice}}</p>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col">
+							{{> field-info label="Сума до сплати:" name="promocode"}}
+							<p class="name">{{data.totalPrice}}</p>
+						</div>
+						<div class="col">
+							{{> field-info label="Нараховані бонуси:" name="promocode"}}
+							<p class="name">{{data.bonusEarned}}</p>
+						</div>
+					</div>
+				</div>
+
+				{{> divider}}
+
+		
+
+				<strong class="form-card__total">
+					Всього: {{totalPrice}} грн ({{bonus}} грн бонусів)
+				</strong>
+
+				{{> button text="Змінити дані"}} 
+			
+		
+	
+	
+		</form>
+	</main>
+
+
+
+
+{{! 
+    Цей код містить лише те, що буде виводитись в <body>
+    Адже наш layout/default.hbs має вже структуру HTML
+}}

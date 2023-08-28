@@ -1,7 +1,7 @@
 @use '../../lib/service.scss' as s;
 
 
-.product__card {
+.product-card {
 	border-radius: 10px;
 	border: 1px solid black;
 	padding: s.space(4);
@@ -12,22 +12,22 @@
 	
 }
 
-.productt__card__image {
+.product-card__image {
 	max-height: 300px;
 	width: 100%;
 }
 
-.product__card__title {
+.product-card__title {
 	font-size: 20px;
 	font-weight: bold;
 }
 
-.product__card__subtitle {
+.product-card__subtitle {
 	font-size: 16px;
 	color: gray;
 }
 
-.product__card__category {
+.product-card__category {
 	padding: s.space(1) s.space(3);
 	border-radius: 30px;
 	font-size: 14px;
@@ -35,17 +35,17 @@
 	border: 1px solid transparent;
 }
 
-.product__card__category--1 {
+.product-card__category--1 {
 	border-color: blue;
 	color: blue;
 }
 
-.product__card__category--2 {
+.product-card__category--2 {
 	border-color: green;
 	color: green;
 }
 
-.product__card__button{
+.product-card__button{
 	background-color: blue;
 	color: white;
 	border: none;
@@ -57,5 +57,9 @@
 	
 	&:hover {
 		opacity: 0.7;
+	}
+
+	&:active {
+		opacity: 0.3;
 	}
 }

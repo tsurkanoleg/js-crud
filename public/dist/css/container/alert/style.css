@@ -1,3 +1,61 @@
+.button {
+  background-color: blue;
+  color: white;
+  border: 1px solid blue;
+  border-radius: 10px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: opacity 0.5s ease;
+}
+.button:hover {
+  opacity: 0.7;
+}
+.button:active {
+  opacity: 0.3;
+}
 
+.card {
+  margin: 15px;
+  padding: 10px;
+  border: 1px solid gray;
+  border-radius: 10px;
+  box-shadow: 1px 1px 1px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card__header {
+  display: grid;
+  gap: 5px;
+}
+
+.card__title {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.card__subtitle {
+  font-size: 18;
+  color: gray;
+}
+
+.card__button {
+  color: white;
+  text-decoration: none;
+  background-color: blue;
+  border: 1px solid blue;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: opacity 1s ease;
+}
+.card__button:hover {
+  opacity: 0.7;
+}
+.card__button:active {
+  opacity: 0.3;
+}
 
 /*# sourceMappingURL=style.css.map */
