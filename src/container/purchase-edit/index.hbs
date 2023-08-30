@@ -6,11 +6,12 @@
 
 	<main class="main">
 		
-			<form method="POST" action="/purchase-edit?id={{ID}}" class="form-card">
+			<form method="POST" action="/purchase-alert?id={{id}}" class="form-card">
 				{{> heading title="Зміна данних"}}
 
-		 
-				<div class="id">ID: {{ID}} </div>
+		 {{#with data}}
+		 	{{#each this}}
+				<div class="id">ID: {{id}} </div>
 											
 				<div class="col">
 					<div class="row">
@@ -31,11 +32,13 @@
 					</div>
 				</div>
 
-			
+				{{/each}}
+
+			{{/with}}
 
 				{{> button text="Зберегти зміни"}} 
 			
-		
+			
 	
 	
 		</form>

@@ -164,15 +164,6 @@ class Purchase {
 		return newPurchase
 	}
 
-	// static getList = () => {
-	// 	return Purchase.#list.reverse().map((purchase) => {
-	// 		id, 
-	// 		name, 
-	// 		totalPrice, 
-	// 		bonus 
-	// 	}) // Через дуструктуризацію витягуємо необхідні дані  і повертаємо в об'єкт
-	// }
-
 
 	static getList = () => {
     return Purchase.#list.reverse().map((purchase) => ({
@@ -183,12 +174,14 @@ class Purchase {
     }))
   }
 
-
-
-
-	static getById = (id) => {
+		static getById = (id) => {
 		return Purchase.#list.find((item) => item.id === id)
 	}
+
+
+	// static getById = (id) => {
+	// 	return Purchase.#list.find((item) => item.id === id)
+	// }
 
 	static updateById = (id, data) => {
 		const purchase = Purchase.getById(id)
@@ -395,10 +388,9 @@ router.post('/purchase-submit', function (req, res) {
 	if(
 		isNaN(totalPrice) ||
 		isNaN(productPrice) || 
-		isNaN(deliveryPrice)
-		// || 	isNaN(amount)
-
-		|| isNaN(bonus)
+		isNaN(deliveryPrice) || 	
+		isNaN(amount) || 
+		isNaN(bonus)
 
 	) {
 		
@@ -486,7 +478,6 @@ router.post('/purchase-submit', function (req, res) {
 
 router.get('/purchase-list', function (req, res) {
 	const list = Purchase.getList()
-  // console.log('purchase-list:', list)
 
   res.render('purchase-list', {
    
@@ -496,15 +487,8 @@ router.get('/purchase-list', function (req, res) {
       purchases: {
         list,
       },
-      // bonus, // Отримати bonusAmount з параметрів URL
-    },
+		},
 
-		// data: {
-		// 	ID: Purchase.getList.getById,
-		// 	name: Purchase.getList.title,
-		// 	totalPrice: Purchase.getList.totalPrice,
-		// 	bonus: Purchase.getList.bonus, 
-		// }	 
 
 		
   })
@@ -513,31 +497,29 @@ router.get('/purchase-list', function (req, res) {
 // ================================================================
 
 router.get('/purchase-info', function (req, res) {
-
+	const id = Number(req.query.id)
+  const purchase = Purchase.getById(id)
+  const bonus = Purchase.calcBonusAmount(purchase.totalPrice)
+	
   res.render('purchase-info', {
 	
    
     style: 'purchase-info',	
-		// component: ['heading', 'divider', 'button'],
+    title: 'Інформація про замовлення',
 
-		// title: 'Інформація про замовлення',
-
-		data: {
-			purchaseId: Purchase.id,
-      firstname: Purchase.firstname,
-      lastname: Purchase.lastname,
-      phone: Purchase.phone,
-      email: Purchase.email,
-			
-			deliveryAddress: "вул. Центральна 14, кв. 36, м. Київ, 02000, Україна",
-
-			productName: Purchase.product.title,
-      productPrice: Purchase.productPrice,
-      deliveryPrice: Purchase.deliveryPrice,
-      totalPrice: Purchase.totalPrice,
+    data: {
+      id: purchase.id,
+      firstname: purchase.firstname,
+      lastname: purchase.lastname,
+      phone: purchase.phone,
+      email: purchase.email,
+      delivery: purchase.delivery,
+      product: purchase.product.title,
+      productPrice: purchase.productPrice,
+      deliveryPrice: purchase.deliveryPrice,
+      totalPrice: purchase.totalPrice,
       bonus: bonus,
-		}
-		
+    },
   })
 })
 
@@ -545,19 +527,22 @@ router.get('/purchase-info', function (req, res) {
 // ================================================================
 
 router.get('/purchase-edit', function (req, res) {
+	
 
-  res.render('purchase-edit', {
+	const id = Number(req.query.id);
+  const purchase = Purchase.getById(id);
+
+
+  res.render('purchase-edit', {		
    
     style: 'purchase-edit',	
 		title: 'Зміна данних',
 
+		
+
 		data: {
-			purchaseId: Purchase.id,
-      firstname: Purchase.firstname,
-      lastname: Purchase.lastname,
-      phone: Purchase.phone,
-      email: Purchase.email,		
-		}
+			purchase
+		},
 		
   })
 })
