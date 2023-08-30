@@ -8,7 +8,7 @@
 
 		<div class="header">Інформація про замовлення</div>
 		
-			<form method="POST" action="/purchase-edit?id={{data.id}}" class="form-card">
+			{{!-- <form method="POST" action="/purchase-edit?id={{data.id}}" class="form-card"> --}}
 					
 				{{#with data}}
 		 		
@@ -82,12 +82,15 @@
 							Всього: {{totalPrice}} грн ({{bonus}} грн бонусів)
 						</strong>
 
+					 
 
     		{{/with}}
 
-				{{> button text="Змінити дані"}} 
+				<a href='/purchase-edit?id={{data.id}}'>
+            {{> button text="Змінити дані"}}
+          </a>
 	
-			</form>
+			{{!-- </form> --}}
 	</main>
 
 
