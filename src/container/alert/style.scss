@@ -1,0 +1,48 @@
+@use '../../lib/service.scss' as s;
+
+@use '../../component/button/style.scss' as button;
+
+.card {
+	margin: 15px;
+	padding: 10px;
+	border: 1px solid gray;
+	border-radius: 10px;
+	box-shadow: 1px 1px 1px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.card__header {
+	display: grid;
+	gap: 5px;
+}
+
+.card__title {
+	font-size: 24px;
+	font-weight: 700;
+}
+
+.card__subtitle {
+	font-size: 18;
+	color: gray;
+}
+
+.card__button{
+	color: white;
+	text-decoration: none;
+	background-color: blue;
+	border: 1px solid blue;
+	border-radius: 5px;
+	padding: 10px 20px;
+	cursor: pointer;
+	transition: opacity 1s ease ;
+
+	&:hover {
+		opacity: 0.7;
+	}
+
+	&:active {
+		opacity: 0.3;
+	}
+}
