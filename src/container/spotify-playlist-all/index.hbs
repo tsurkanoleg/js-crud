@@ -1,0 +1,63 @@
+{{! 
+Це код container файлу для index сторінки, 
+в якому міститься код, котрий буде віддаватися по шляху (PATH) - "/"
+ }}
+
+<main class="main">
+	<div class="content">
+		<div class="header">
+			<div class="header_title">Моя бібліотека</div>
+			<div class="header_item">			
+				<a href="/spotify-choose">
+				<img src="\svg\add_playlist.svg" alt="Add playlist" class="find">
+				</a>
+				
+				<a href="/spotify-search">
+				<img src="\svg\spotify-search2.svg" alt="Search playlist" class="search">
+				</a>
+			</div>
+		</div>
+
+		<div class="card__list">
+
+			{{#with data}}			
+				<div class="card">
+					<img class="card__img" src="{{image}}" alt="img playlist">
+					<strong class="card__title">{{name}}</strong>
+					{{!-- <p class="card__description">{{length}}</p> --}}
+				</div>
+			{{/with}}
+
+		
+			<div class="card">
+				<img class="card__img"  src="https://picsum.photos/100/100" alt="img playlist">
+				<strong class="card__title">Пісні, що сподобались</strong>
+				<p class="card__description">song</p>
+			</div>
+						
+			<div class="card">
+				<img class="card__img"  src="https://picsum.photos/100/100" alt="img playlist">
+				<strong class="card__title">Пісні, що сподобались</strong>
+				<p class="card__description">song</p>
+			</div>
+						
+			<div class="card">
+				<img class="card__img" src="https://picsum.photos/100/100" alt="img playlist">
+				<strong class="card__title">Пісні, що сподобались</strong>
+				<p class="card__description">song</p>
+			</div>
+
+			<div class="card">
+				<img class="card__img"  src="https://picsum.photos/100/100" alt="img playlist">
+				<strong class="card__title">Пісні, що сподобались</strong>
+				<p class="card__description">song</p>
+			</div>
+		
+		</div>
+	</div>
+</main>
+
+{{! 
+    Цей код містить лише те, що буде виводитись в <body>
+    Адже наш layout/default.hbs має вже структуру HTML
+}}
