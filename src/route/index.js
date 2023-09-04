@@ -15,7 +15,7 @@ class Track {
 		this.image = image
 	}
 
-	// Статичний метод для створення об'єкту Track і додавання його до об'єкту #list 
+	// Статичний метод для створення об'єкту Track і додавання його до списку #list 
 	static create(name, author, image) {
 		const newTrack = new Track(name, author, image)
 		this.#list.push(newTrack)
@@ -90,9 +90,9 @@ class Playlist {
 		this.image = 'https://picsum.photos/100/100'
 	}
 
-	// Статичний метод для створення об'єкту Playlist  і додавання його до списку #list
-	static create(name) {
-		const newPlaylist = new Playlist(name)
+	// Статичний метод для створення об'єкту Track і додавання його до списку #list
+	static create(name, image) {
+		const newPlaylist = new Playlist(name, image)
 		this.#list.push(newPlaylist)
 		return newPlaylist
 	}
@@ -107,7 +107,7 @@ class Playlist {
 
 		let randomTracks = allTracks
 			.sort(() => 0.5 - Math.random())
-			.slice(0, 3)
+			.splice(0, 3)
 
 		playlist.track.push(...randomTracks)
 	}
@@ -154,39 +154,23 @@ Playlist.makeMix(Playlist.create('Test3'))
 // ================================================================
 
 router.get('/', function (req, res) {
-	// const id = Playlist.getById()
+	allTracks = Track.getList()
+	const allPlaylists = Playlist.getList()
 
-	// console.log(list)
-
-	// const [name, image, track, ...qwe] = list
-	console.log('================111=======================')
-	// const list = Playlist.getList(id)
-
-	// const {name, image} = list
-
-	// console.log(name, image)
-	console.log('================222=======================')
+	console.log(allTracks)
+	console.log(allPlaylists)
 	
 
-	// const [Test1, Test2, Test3, ...Testn] = a
-	// console.log(Test2)
 
-	// const{id1, name, track, image} = Test1
-
-	// const b = Track.filter((obj) => obj.id = true)
-
-	// console.log(b)
-
-	console.log('================333=======================')
-	
-
-	
-	console.log('================444=======================')
   res.render('spotify-playlist-all', {
    
     style: 'spotify-playlist-all',	
 
 		data: {
+			list: allPlaylists.map(({ tracks, ...rest }) => ({
+        ...rest,
+        amount: tracks.length,
+      })),
 			// image: list.image,
 			// name: list.name,
 			// length: list.track.length,
@@ -262,6 +246,7 @@ router.post('/spotify-create', function (req, res) {
 			playlistId: playlist.id,
 			tracks: playlist.track,
 			name: playlist.name,
+			image: playlist.image,
 		},
 		
   })
@@ -411,17 +396,21 @@ router.post('/spotify-search', function (req, res) {
 	
 router.get('/spotify-track-add', function (req, res) {
   const playlistId = Number(req.query.playlistId)
+	const trackId = Number(req.query.trackId)
+
   const playlist = Playlist.getById(playlistId)
-  const allTracks = Track.getList()
+	const allTracks = Track.getList()
 
   console.log(playlistId, playlist, allTracks)
+
+	
 
   res.render('spotify-track-add', {
     style: 'spotify-track-add',
 
     data: {
       playlistId: playlist.id,
-      tracks: allTracks(trackId),
+      tracks: allTracks(),
       link: `/spotify-track-add?playlistId={{playlistId}}&trackId={{id}}`,
     },
   })
