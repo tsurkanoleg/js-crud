@@ -96,4 +96,8 @@ body {
   font-size: 18px;
 }
 
+.playlist {
+  display: flex;
+}
+
 /*# sourceMappingURL=style.css.map */
