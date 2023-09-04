@@ -154,32 +154,32 @@ Playlist.makeMix(Playlist.create('Test3'))
 // ================================================================
 
 router.get('/', function (req, res) {
-	const id = Playlist.getById()
+	// const id = Playlist.getById()
 
 	// console.log(list)
 
 	// const [name, image, track, ...qwe] = list
 	console.log('================111=======================')
-	const list = Playlist.getList(id)
+	// const list = Playlist.getList(id)
 
-	const {name, image} = list
+	// const {name, image} = list
 
-	console.log(name, image)
+	// console.log(name, image)
 	console.log('================222=======================')
 	
 
-	const [Test1, Test2, Test3, ...Testn] = a
+	// const [Test1, Test2, Test3, ...Testn] = a
 	// console.log(Test2)
 
 	// const{id1, name, track, image} = Test1
 
-	const b = track.filter((obj) => obj.id = true)
+	// const b = Track.filter((obj) => obj.id = true)
 
-	console.log(b)
+	// console.log(b)
 
 	console.log('================333=======================')
 	
-	console.log(track.length)
+
 	
 	console.log('================444=======================')
   res.render('spotify-playlist-all', {
@@ -187,8 +187,8 @@ router.get('/', function (req, res) {
     style: 'spotify-playlist-all',	
 
 		data: {
-			image: list.image,
-			name: list.name,
+			// image: list.image,
+			// name: list.name,
 			// length: list.track.length,
 		},
 		
@@ -409,6 +409,69 @@ router.post('/spotify-search', function (req, res) {
 	
 // ================================================================
 	
+router.get('/spotify-track-add', function (req, res) {
+  const playlistId = Number(req.query.playlistId)
+  const playlist = Playlist.getById(playlistId)
+  const allTracks = Track.getList()
+
+  console.log(playlistId, playlist, allTracks)
+
+  res.render('spotify-track-add', {
+    style: 'spotify-track-add',
+
+    data: {
+      playlistId: playlist.id,
+      tracks: allTracks(trackId),
+      link: `/spotify-track-add?playlistId={{playlistId}}&trackId={{id}}`,
+    },
+  })
+})
+
+// ================================================================
+// Шлях POST для додавання треку до плейліста
+router.post('/spotify-track-add', function (req, res) {
+  const playlistId = Number(req.body.playlistId)
+  const trackId = Number(req.body.trackId)
+
+  const playlist = Playlist.getById(playlistId)
+
+  if (!playlist) {
+    return res.render('alert', {
+      style: 'alert',
+      data: {
+        message: 'Помилка',
+        info: 'Такого плейліста не знайдено',
+        link: `/spotify-playlist?id=${playlistId}`,
+      },
+    })
+  }
+
+  const trackToAdd = Track.getList().find(
+    (track) => track.id === trackId,
+  )
+
+  if (!trackToAdd) {
+    return res.render('alert', {
+      style: 'alert',
+      data: {
+        message: 'Помилка',
+        info: 'Такого треку не знайдено',
+        link: `/spotify-track-add?playlistId=${playlistId}`,
+      },
+    })
+  }
+
+  playlist.tracks.push(trackToAdd)
+
+  res.render('spotify-track-add', {
+    style: 'spotify-track-add',
+    data: {
+      playlistId: playlist.id,
+      tracks: playlist.tracks,
+      name: playlist.name,
+    },
+  })
+})
 	
 
 // Підключаємо роутер до бек-енду
